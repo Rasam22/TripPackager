@@ -17,13 +17,14 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
+    # add logic for proper login
     return render(request, 'weather/index.html')
 
 def registerView(request):
     if request.method=='POST':
         form=UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user=form.save()
             return redirect('login')
     else:
         form=UserCreationForm()

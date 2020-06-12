@@ -12,10 +12,10 @@
     <style>
         #mydiv {
             position: fixed;
-            top: 25%;
+            top: 35%;
             left: 25%;
             width: 50%;
-            background-color: rgb(150, 147, 147, 0.5)
+            background-color: rgb(150, 147, 147, 0.6)
         }
     </style>
 </head>
@@ -32,6 +32,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
@@ -47,19 +49,6 @@
                     <input type="text" name="content" class="form-control mb-2" placeholder="type here...">
                     <button type="submit" class="btn btn-primary mb-2">Submit</button>
                 </form>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col">
-                <div class="list-group">
-                    {% for w in weather %}
-                    <figure class="image is-50x50">
-                        <img src="http://openweathermap.org/img/w/{{ w.icon }}.png" alt="Image">
-                    </figure>
-                    <a href="#" class="list-group-item list-group-item-action">{{ w.text }}<br>{{ w.temperature }}'C<br>{{ w.descrip }}
-                </a> {% endfor %}
-                </div>
             </div>
         </div>
     </div>

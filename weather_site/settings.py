@@ -24,7 +24,7 @@ SECRET_KEY = '&(lh2ty32ip8akk7am&f9g5c=%4*aoy7i1g0nw#p8!bpc#3(bf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['trippackager.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','trippackager.herokuapp.com']
 
 # Application definition
 

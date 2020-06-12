@@ -22,6 +22,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
@@ -30,19 +32,19 @@
     <div class="container">
         <div class="row mt-4">
             <div class="col">
-                <div class="list-group" style="background-color: rgb(165, 214, 236);">
+                <div class="list-group" style="background-color: rgb(165, 214, 236); border-radius:15px">
                     <figure class="image is-50x50">
-                        <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Image">
+                        <img style="margin-left: 50px;" src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Image">
                     </figure>
-                    <h6>Travel Place : {{city}}</h6>
-                    <h6>Temperature : {{ temp }}</h6>
-                    <h6>Weather Description : {{ desc }}</h6>
+                    <h6 style="margin-left: 50px;">Travel Place : {{city}}</h6>
+                    <h6 style="margin-left: 50px;">Temperature : {{ temp }}</h6>
+                    <h6 style="margin-left: 50px;">Weather Description : {{ desc }}</h6>
                 </div>
                 <br>
-                <div>
-                    <h2>Your Packing List must Include : </h2>
+                <div style="background-color: rgb(165, 214, 236); border-radius:15px">
+                    <h2 style="margin-left: 30px;">Your Packing List must include : </h2>
                     <br> {%for i in items%}
-                    <input type="checkbox" id="vehicle1" name={{forloop.counter}}>
+                    <input style="margin-left: 50px;" type="checkbox" name={{forloop.counter}}>
                     <label for={{forloop.counter}}>{{i}}</label> <br>{%endfor%}
                 </div>
             </div>
