@@ -50,8 +50,6 @@ kiwisolver==1.0.1
 launchpadlib==1.10.6
 lazr.restfulclient==0.14.0
 lazr.uri==1.0.3
-louis==3.6.0
-lxml==4.2.5
 macaroonbakery==1.1.4
 Mako==1.0.7
 Markdown==3.1.1
