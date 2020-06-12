@@ -103,8 +103,6 @@ tensorflow==1.14.0
 tensorflow-estimator==1.14.0
 termcolor==1.1.0
 tinycss2==1.0.2
-ufw==0.36
-unattended-upgrades==0.1
 urllib3==1.22
 usb-creator==0.3.3
 virtualenv==20.0.21
