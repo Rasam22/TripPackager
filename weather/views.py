@@ -13,9 +13,12 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from django.conf.global_settings import LOGIN_REDIRECT_URL
+from django.contrib import messages
 
 
 # Create your views here.
+def home(request):
+    return render(request,'weather/index.html')
 
 # To register user
 def user_registration(request):
@@ -34,9 +37,10 @@ def user_profile(request):
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user is not None:        
-            return render(request, 'weather/index.html')
+            return redirect('home/')
         else :
-            return render(request,'registration/login.html')
+            msg = "Enter Correct Details"
+            return render(request,'registration/login.html',{'message':msg})
     else:
         return render(request,'registration/login.html')
 
@@ -45,10 +49,16 @@ def user_profile(request):
 @csrf_exempt
 def add_city(request):
     current_date = timezone.now()
-    city = request.POST["content"]
+    city = request.POST.get('content')
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=c812a2a33fd7892739ba5b4c09b2e499'
 
-    r = requests.get(url.format(city)).json()
+    result = requests.get(url.format(city))
+    if(result.status_code!=200):
+        err = "This place doesnot exist. Please enter correct Name"
+        messages.error(request, err)
+        return redirect('/home/')
+    
+    r = result.json()
     city_weather= {'city': city,
             'temperature': r['main']['temp'],
             'description' : r['weather'][0]['description'],
