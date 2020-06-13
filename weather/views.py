@@ -17,6 +17,8 @@ from django.contrib import messages
 
 
 # Create your views here.
+
+#Function to redirect user to home page
 def home(request):
     return render(request,'weather/index.html')
 
@@ -35,7 +37,7 @@ def user_profile(request):
     if request.method =='POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=password) #Checks if user is authenticated
         if user is not None:        
             return redirect('home/')
         else :
@@ -43,6 +45,7 @@ def user_profile(request):
             return render(request,'registration/login.html',{'message':msg})
     else:
         return render(request,'registration/login.html')
+
 
 # To display list of items according to users needs
 
@@ -52,10 +55,10 @@ def add_city(request):
     city = request.POST.get('content')
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=c812a2a33fd7892739ba5b4c09b2e499'
 
-    result = requests.get(url.format(city))
+    result = requests.get(url.format(city)) #get weather of place through API
     if(result.status_code!=200):
         err = "This place doesnot exist. Please enter correct Name"
-        messages.error(request, err)
+        messages.error(request, err) #Redirect for wrong place
         return redirect('/home/')
     
     r = result.json()
@@ -66,7 +69,7 @@ def add_city(request):
                   }
     temp=city_weather['temperature']
     Seasons = seasons.objects.all()
-    matchedSeasons=[]
+    matchedSeasons=[]                #Creates List of items according to seasons found by temperature
     for s in Seasons:
         if float(s.temperatureStart)<=temp and float(s.temperatureEnd)>=temp:
             matchedSeasons.append(s.season)
