@@ -7,28 +7,40 @@ from .models import seasonalItems
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views import generic
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm
+from django.conf.global_settings import LOGIN_REDIRECT_URL
 
 
 # Create your views here.
-def home(request):
-    # add logic for proper login
-    return render(request, 'weather/index.html')
 
-def registerView(request):
-    if request.method=='POST':
-        form=UserCreationForm(request.POST)
+# To register user
+def user_registration(request):
+    form = CustomUserCreationForm(request.POST or None, request.FILES or None)
+    if request.method == 'POST':
         if form.is_valid():
-            user=form.save()
-            return redirect('login')
+            form.save()
+            return redirect('user_profile')
+        # If the request params is valid save the data else return form with error
+    return render(request, 'registration/registration.html', {'form': form})
+
+# To login user after authentication
+def user_profile(request):
+    if request.method =='POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:        
+            return render(request, 'weather/index.html')
+        else :
+            return render(request,'registration/login.html')
     else:
-        form=UserCreationForm()
-    return render(request,'registration/register.html',{'form':form})
+        return render(request,'registration/login.html')
+
+# To display list of items according to users needs
 
 @csrf_exempt
 def add_city(request):
