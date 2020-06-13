@@ -7,7 +7,7 @@ GOOGLE API is used to get weather conditions of that place and correspondingly g
 
 1. Clone the repository from : https://github.com/rasam22/TripPackager using command "git clone https://github.com/rasam22/TripPackager".
 
-2. Create a virtual environment using command "virtualenv virtual_env_name" and then type command "source virtual_env_name/bin/activate".
+2. Create a virtual environment using command "virtualenv virtual_env_name" and then type command "source virtual_env_name/bin/activate" to activate your virtual env.
 
 3. Install requirements for local setup using command "pip3 install -r localReq.txt".
 
