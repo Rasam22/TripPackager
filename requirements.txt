@@ -98,7 +98,7 @@ systemd-python==234
 tables==3.4.4
 tablib==0.14.0
 tensorboard==1.14.0
-tensorflow==1.14.0
+tensorflow==2.5.1
 tensorflow-estimator==1.14.0
 termcolor==1.1.0
 tinycss2==1.0.2
